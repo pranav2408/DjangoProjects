@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LatestPost</title>
+</head>
+<body>
+{% for post in latest_posts %}
+<ul>
+    <li>
+        <a href="{{post.get_absolute_url}}" >{{ post.title }}</a>
+    </li>
+</ul>
+{% endfor %}
+</body>
+</html>

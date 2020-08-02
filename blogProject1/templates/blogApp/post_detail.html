@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+{% extends 'blogApp/base.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block title_block %} {{post.title}} {% endblock %}
+
+{% block body_block %}
+<h1>{{post.title}}</h1>
+
+<p id="date">Published on {{post.publish}} by {{post.author|title}}</p>
+{{post.body|linebreaks}}
+Tags: {{post.tags.all|join:','}}
+<br><br>
+<a href="/{{post.id}}/share/" >Share by Email</a> <tb>&nbsp &nbsp&nbsp &nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp&nbsp &nbsp&nbsp &nbsp  &nbsp &nbsp<a href="/">Back</a>
+{% with comments.count as comments_count %}
+<h2>{{comments_count}} comment{{comments_count|pluralize}}</h2>
+{% endwith %}
+{% if comments %}
+{% for comment in comments %}
+<p>Comment {{ forloop.counter }} by {{comment.name}} on {{comment.created}}:</p>
+<div>{{comment.body|linebreaks}}</div>
+{% endfor %}
+{%else%}
+<p>There are no comments for this post</p>
+{% endif %}
+
+{% if csubmit %}
+<h2>Your added successfully</h2>
+{% endif %}
+<form method="post">
+    {{form.as_p}}
+    {% csrf_token %}
+<input type="submit" value = 'Submit Comment'>
+</form>
+{% endblock %}
+</body>
+</html>

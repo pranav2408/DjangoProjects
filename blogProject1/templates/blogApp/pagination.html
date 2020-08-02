@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Paginator Page</title>
+</head>
+<body>
+<div class="paginator">
+    {% if page.has_previous %}
+    <a href="?page={{page.previous_page_number}}">Previous Page</a>
+    {% endif %}
+    <span>Page {{page.number}} of {{ page.paginator.num_pages }} </span>
+    {% if page.has_next %}
+    <a href="?page={{page.next_page_number}}">Next Page</a>
+    {% endif %}
+</div>
+</body>
+</html>
